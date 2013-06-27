@@ -1,0 +1,47 @@
+﻿<Window x:Class="WpfApplicationOxyPlot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf" 
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        xml:lang="de-DE"
+        Title="OxyPlot SimpleDemo" Height="347.164" Width="786.269">
+    <Grid>
+        <oxy:Plot x:Name="plot1" 
+                  Title="Texas Instruments TMP102 Temperature Sensor" 
+                  Margin="162,10,10,10">
+            <oxy:Plot.Axes>
+                <oxy:LinearAxis Title="Sample number" 
+                                Position="Bottom" 
+                                MajorGridlineStyle="Solid" 
+                                MinorGridlineStyle="Solid" 
+                                MinimumPadding="0" 
+                                MaximumPadding="0"/>
+                <oxy:LinearAxis Title="Temperature [°C]" 
+                                Position="Left" 
+                                MajorGridlineStyle="Solid" 
+                                MinorGridlineStyle="Solid" 
+                                FontSize="12" 
+                                TicklineColor="#FF190000" 
+                                TickStyle="Outside" />
+            </oxy:Plot.Axes>
+            <oxy:Plot.Series>
+                <oxy:LineSeries
+                    ItemsSource="{Binding Data, Mode=OneWay}"
+                    DataFieldX="xData"
+                    DataFieldY="yData"
+                    MarkerSize="3"
+                    MarkerType="Plus"
+                    />
+            </oxy:Plot.Series>
+        </oxy:Plot>
+        <Button Command="{Binding IncrementValue}" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBlock Text="{Binding ExampleValue}" HorizontalAlignment="Left" Margin="10,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding TimeCommand}" HorizontalAlignment="Left" Margin="10,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Name="RandomData" Text="{Binding RandomNumberValue, StringFormat=F3}" HorizontalAlignment="Left" Margin="10,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding ElementName=Slider1, Path=Value}" HorizontalAlignment="Left" Margin="10,226,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="117"/>
+        <Slider Name="Slider1" Minimum="22" Maximum="23" Value="{Binding ElementName=RandomData,Path=Text,Mode=OneWay}" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="116"/>
+        <TextBlock Name="textBlock1" Text="{Binding CollectionToString}" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+
+        
+    </Grid>
+</Window>
